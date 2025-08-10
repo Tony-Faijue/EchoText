@@ -129,7 +129,7 @@ def extract_text_from_image(processed_image):
     return "", 0, "none"
 
 # Get the resulting image after preprocessing
-result = preprocess_for_ocr('Images/EnglishParagExample.png')
+result = preprocess_for_ocr('Images/ColorText.png')
 
 # Get the best text result after extracting text with tesseract
 finalText = extract_text_from_image(result)
