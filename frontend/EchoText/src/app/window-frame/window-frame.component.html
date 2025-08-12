@@ -1,0 +1,12 @@
+<div class="container border-4 border-cyan-700">
+  <webcam
+    class="block w-full h-[800px] border-4 border-yellow-200"
+    [width]="700"
+    [height]="500"
+    [videoOptions]="webcamService.videoOptions"
+    [trigger]="webcamService.getTriggerObservable()"
+    (imageCapture)="webcamService.handleImage($event)"
+    (initError)="webcamService.handleInitError($event)"
+  >
+  </webcam>
+</div>

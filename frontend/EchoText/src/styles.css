@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@layer utilities{
+webcam .webcam-wrapper video,
+webcam .webcam-wrapper  {
+    width: 100% !important;
+    height: 100% !important;
+    @apply w-full h-full object-cover;
+}
+}
