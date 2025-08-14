@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.camera-toggle-btn{
+    @apply bg-red-500 border-slate-200 rounded-lg px-4;
+}

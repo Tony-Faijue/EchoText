@@ -1,4 +1,10 @@
 <div class="container border-4 border-cyan-700">
+  <div class="place-self-center border border-amber-400 mt-2 mb-2">
+    <button class="camera-toggle-btn" (click)="toggleCamera()">
+      {{ webcamService.showWebcam() ? "Stop Camera" : "Toggle Camera" }}
+    </button>
+  </div>
+  @if (webcamService.showWebcam() == true){
   <webcam
     class="block w-full h-[800px] border-4 border-yellow-200"
     [width]="700"
@@ -7,6 +13,26 @@
     [trigger]="webcamService.getTriggerObservable()"
     (imageCapture)="webcamService.handleImage($event)"
     (initError)="webcamService.handleInitError($event)"
+    [mirrorImage]="webcamService.mirrorImage()"
+    [allowCameraSwitch]="webcamService.allowCameraSwitch()"
+    [trigger]="webcamService.getTriggerObservable()"
+    (imageCapture)="webcamService.handleImage($event)"
   >
   </webcam>
+
+  } @else{
+  <div class="block w-full h-[800px] border-4 border-yellow-200"></div>
+  }
+  <div class="place-self-center mt-2 mb-2 border border-amber-100">
+    <button class="camera-toggle-btn" (click)="webcamService.triggerSnapShot()">
+      Caputre Image
+    </button>
+  </div>
+  <div class="border-4 border-amber-300">
+    @if(webcamService.previewImage()){
+    <img
+      [src]="webcamService.previewImage()"
+      class="w-80 h-60 border border-indigo-300"
+    />}
+  </div>
 </div>

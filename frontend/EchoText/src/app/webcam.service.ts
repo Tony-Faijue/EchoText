@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, OnInit, signal } from '@angular/core';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { Observable, Subject } from 'rxjs';
 
@@ -14,11 +14,11 @@ export class WebcamService implements OnInit {
   //Latest snapshot
   private webcamImage: WebcamImage|null = null;
 
-  public errors: WebcamInitError[] =[];
+  public errors = signal<WebcamInitError[]>([]);
 
   //Available Cameras
-  public multipleWebcamsAvailable = false;
-  public deviceId: string = '';
+  public multipleWebcamsAvailable = signal(false);
+  public deviceId = signal('');
 
   //Default Video Options
   public videoOptions: MediaTrackConstraints = {
@@ -27,18 +27,18 @@ export class WebcamService implements OnInit {
   }
 
   //Webcam settings
-  public cameraSwitched = false;
-  public mirrorImage = 'never';
-  public allowCameraSwitch = true;
-  public showWebcam = true;
-  public isCameraExist = true;
+  public cameraSwitched = signal(true);
+  public mirrorImage = signal('never');
+  public allowCameraSwitch = signal(true);
+  public showWebcam = signal(false);
+  public isCameraExist = signal(true);
   
-  public capturedImages: WebcamImage[] = [];
+  public capturedImages = signal<WebcamImage[]>([]);
+  public previewImage = signal('');
 
   constructor() { }
 
   public ngOnInit(): void {
-    this.initializeCameras();
   }
 
   /**
@@ -47,12 +47,12 @@ export class WebcamService implements OnInit {
   public initializeCameras():void {
     WebcamUtil.getAvailableVideoInputs()
     .then((mediaDevices: MediaDeviceInfo[]) =>{
-      this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1 ;
+      this.multipleWebcamsAvailable.set(mediaDevices && mediaDevices.length > 1);
       console.log('Available Cameras:', mediaDevices);
     })
     .catch(err =>{
       console.error('Error getting cameras:', err);
-      this.errors.push(err);
+      this.errors.update(errors => [...errors, err]);
     });
   }
 
@@ -95,7 +95,7 @@ export class WebcamService implements OnInit {
    */
   public handleInitError(error: WebcamInitError):void{
     console.error('Webcam init error:', error);
-    this.errors.push(error);
+    this.errors.update(errors => [...errors, error]);
   }
 
   /**
@@ -106,14 +106,19 @@ export class WebcamService implements OnInit {
   public handleImage(webcamImage: WebcamImage): void{
     console.log('Received webcam image', webcamImage);
     this.webcamImage = webcamImage;
-    this.capturedImages.push(this.webcamImage);
+    this.capturedImages.update(captured => [...captured, webcamImage]);
+    this.previewImage.set(webcamImage.imageAsDataUrl);
+  }
+
+  public viewSnapShots(){
+      console.log("Captured Images", this.capturedImages);
   }
 
   /**
    * Toggle WebCam On or Off
    */
   public toggleWebCam(): void{
-    this.showWebcam = !this.showWebcam;
+    this.showWebcam.set(!this.showWebcam());
   }
 
   /**
@@ -122,9 +127,10 @@ export class WebcamService implements OnInit {
    * Set the active camera
    */
   public setActiveDevice(deviceId: string):void{
-    this.deviceId = deviceId;
+    this.deviceId.set(deviceId);
     console.log('Active device:' + this.deviceId);
   }
+
 
 
 
