@@ -14,9 +14,21 @@ export class WindowFrameComponent implements OnInit {
 
   //Get states from webcam service
 
-  public showWebCam = this.webcamService.showWebcam;
   
-  public ngOnInit(){ }
+  public ngOnInit(){ 
+    // this.webcamService.initializeCameras();
+  }
+
+  public toggleCamera(){
+    this.webcamService.toggleWebCam();
+    if (this.webcamService.showWebcam()) {
+      this.webcamService.initializeCameras();
+    }
+  }
+
+  public captureImage(){
+    
+  }
 
   
 }
