@@ -1,0 +1,17 @@
+<div>
+  <form
+    [formGroup]="imageData"
+    (ngSubmit)="onFormSubmit()"
+    class="border border-amber-200"
+  >
+    <div class="border border-red-400">
+      <label for="image_upload">Upload Image</label>
+      <input
+        formControlName="imageFile"
+        type="file"
+        class="bg-green-400 rounded-lg"
+      />
+      <button class="" type="submit">Submit</button>
+    </div>
+  </form>
+</div>

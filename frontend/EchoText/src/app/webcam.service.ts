@@ -22,8 +22,9 @@ export class WebcamService implements OnInit {
 
   //Default Video Options
   public videoOptions: MediaTrackConstraints = {
-    width: {ideal: 1024},
-    height: {ideal: 576}
+    width: {min: 640, ideal: 1080, max: 1920},
+    height: {min: 400, ideal: 1350, max: 1080},
+    frameRate: {max: 60},
   }
 
   //Webcam settings

@@ -1,0 +1,9 @@
+<div class="border-4 border-amber-300">
+  @if(webcamService.previewImage()){
+  <img
+    [src]="webcamService.previewImage()"
+    class="w-80 h-60 border border-indigo-300"
+  />} @else{
+  <div class="w-80 h-60 border border-indigo-300"></div>
+  }
+</div>

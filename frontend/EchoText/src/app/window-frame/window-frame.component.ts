@@ -26,9 +26,5 @@ export class WindowFrameComponent implements OnInit {
     }
   }
 
-  public captureImage(){
-    
-  }
-
   
 }
