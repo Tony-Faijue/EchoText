@@ -33,6 +33,7 @@ export class WebcamService implements OnInit {
   public allowCameraSwitch = signal(true);
   public showWebcam = signal(false);
   public isCameraExist = signal(true);
+  public imageQuality = signal(1);
   
   public capturedImages = signal<WebcamImage[]>([]);
   public previewImage = signal('');
