@@ -1,9 +1,8 @@
-<div class="border-4 border-amber-300">
+<div class="image-preview-window">
   @if(webcamService.previewImage()){
-  <img
-    [src]="webcamService.previewImage()"
-    class="w-80 h-60 border border-indigo-300"
-  />} @else{
-  <div class="w-80 h-60 border border-indigo-300"></div>
+  <img [src]="webcamService.previewImage()" class="image-preview" />} @else{
+  <div class="image-preview">
+    <p class="image-preview-text">Image Preview</p>
+  </div>
   }
 </div>
