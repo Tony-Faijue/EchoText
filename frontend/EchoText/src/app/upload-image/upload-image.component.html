@@ -8,9 +8,9 @@
       <div class="upload-img-div-2">
         <label for="image_upload" class="form-heading">Upload Image</label>
         <input
-          formControlName="imageFile"
           type="file"
           class="input-image"
+          (change)="onFileSelected($event)"
           required
         />
         <button class="upload-btn" type="submit">Submit</button>
