@@ -37,6 +37,7 @@ export class WebcamService implements OnInit {
   
   public capturedImages = signal<WebcamImage[]>([]);
   public previewImage = signal('');
+  public imageFileName = signal('');
 
   constructor() { }
 
@@ -79,6 +80,7 @@ export class WebcamService implements OnInit {
    */
   public triggerSnapShot(): void{
     this.trigger.next();
+    
   }
 
   /**
@@ -106,10 +108,16 @@ export class WebcamService implements OnInit {
    * Add the captured image from the Webcam to caputredImages array
    */
   public handleImage(webcamImage: WebcamImage): void{
-    console.log('Received webcam image', webcamImage);
     this.webcamImage = webcamImage;
     this.capturedImages.update(captured => [...captured, webcamImage]);
     this.previewImage.set(webcamImage.imageAsDataUrl);
+
+    const fileName = this.generateFileName();
+    this.imageFileName.set(fileName);
+    
+    console.log(this.imageFileName());
+    console.log('Received webcam image', webcamImage);
+
   }
 
   public viewSnapShots(){
@@ -132,7 +140,24 @@ export class WebcamService implements OnInit {
     this.deviceId.set(deviceId);
     console.log('Active device:' + this.deviceId);
   }
-
+/**
+ * Get the extension of the webcam immage
+ * @param dataUrl 
+ * @returns a string matching a valid image type
+ */
+  private getExtension(dataUrl: string): string{
+    const match =dataUrl.match(/^data:image\/(png|jpe?g);/);
+    return match ? match[1] : 'png';
+  }
+  /**
+   * 
+   * @returns the file name of the webcam image
+   */
+  public generateFileName(): string{
+    const dataUrl = this.previewImage();
+    const ext = this.getExtension(dataUrl);
+    return `webcam-${Date.now()}.${ext}`;
+  }
 
 
 

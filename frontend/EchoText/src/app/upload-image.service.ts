@@ -7,9 +7,10 @@ import { WebcamService } from './webcam.service';
  * An interface that represents the response returned from the server after processing the image
  */
 export interface FileImage{
-  imageURL : String,
-  processedText: String,
-  fileName: String,
+  image_file_id: number,
+  content_type: string,
+  processed_text: string,
+  file_name: string,
 }
 
 @Injectable({
@@ -22,10 +23,8 @@ export class UploadImageService {
   http = inject(HttpClient);
   webcamService = inject(WebcamService);
 
-  //hold the string value of the signal variable from webcam service
-  private imageDataURL = this.webcamService.previewImage();
 
-  baseURL = "http://127.0.0.1:9909/api/process-images";
+  baseURL = "http://127.0.0.1:9999/api/process-images";
 
 
  //Testing API with fake data
@@ -79,27 +78,5 @@ export class UploadImageService {
   //Return the file object
   return new File([array], validFileName, {type: mime});
  }
-
-// placeholder method
-  test(){}
-// Testing http verb methods with API endpoints
-//  getUsers(){
-//   //Url endpoint
-//   //All http methods return an Observable that needs to be subscribe too.
-//   //The Observable returned as a JSON object
-//   this.http.get("https://jsonplaceholder.typicode.com/users").subscribe((response:any)=>{
-//     this.userList = response;
-//       console.log("User Data:", this.userList);
-//   });
-//  }
-//  //Set Up an  POST reqeuest
-//  addUser(){
-//   const post = {id:11, name:"bob", city:"London"};
-//   this.http.post("https://jsonplaceholder.typicode.com/users",post).subscribe(() =>{
-//     console.log("Added New Post!: ");
-//   });
-//  }
-
-
 
 }
