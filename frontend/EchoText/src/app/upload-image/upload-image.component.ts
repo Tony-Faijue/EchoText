@@ -26,6 +26,7 @@ export class UploadImageComponent {
 
   public async onFormSubmit():Promise<void>{
     let file: File | null = this.imageData.value.imageFile;
+    this.webcamService.imageFileName.set(file?.name ?? "text_image");
     console.log(file);
     if(!(file instanceof Blob)) {
       throw new Error("Expected Type must be of Blob/File. " + "Your given type of "+typeof file + " does not match.")
