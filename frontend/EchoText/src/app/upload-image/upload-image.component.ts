@@ -33,7 +33,7 @@ export class UploadImageComponent {
     try{
       //pause and wait until fileToDataUrl function return a promise
     let dataUrl:string  = await this.fileToDataUrl(file);
-    console.log("WebcamImage Uploade:", dataUrl);
+    console.log("WebcamImage Uploaded:", dataUrl);
     this.webcamService.previewImage.set(dataUrl);
   } catch (err) {
     console.log("Error Recieving Promise String", err);

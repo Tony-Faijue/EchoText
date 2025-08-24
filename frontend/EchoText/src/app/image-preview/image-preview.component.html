@@ -1,7 +1,9 @@
 <div class="image-preview-window">
   @if(webcamService.previewImage()){
   <div class="btn-border">
-    <button class="process-img-btn">Process</button>
+    <button class="process-img-btn" (click)="uploadImageService.test()">
+      Process
+    </button>
   </div>
   <img [src]="webcamService.previewImage()" class="image-preview" />
   } @else{

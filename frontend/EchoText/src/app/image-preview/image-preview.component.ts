@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { WebcamService } from '../webcam.service';
+import { UploadImageService } from '../upload-image.service';
 
 @Component({
   selector: 'app-image-preview',
@@ -9,4 +10,5 @@ import { WebcamService } from '../webcam.service';
 })
 export class ImagePreviewComponent {
   webcamService = inject(WebcamService);
+  uploadImageService = inject(UploadImageService);
 }
