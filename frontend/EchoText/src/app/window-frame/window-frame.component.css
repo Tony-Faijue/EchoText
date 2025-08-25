@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+.camera-toggle-btn{
+    @apply bg-gray-600  rounded-lg shadow-lg shadow-slate-800 hover:shadow-lg hover:shadow-slate-300 hover:bg-gray-500 px-4 py-2;
+}
+.capture-btn{
+    @apply bg-gray-600  rounded-lg shadow-lg shadow-slate-800 hover:shadow-lg hover:shadow-slate-300 hover:bg-gray-500 px-4 py-2;
+}
+.webcam-window{
+    @apply block w-full h-[800px] border-4 border-slate-100 rounded-lg;
+}

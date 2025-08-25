@@ -1,0 +1,14 @@
+<div class="image-preview-window">
+  @if(webcamService.previewImage()){
+  <div class="btn-border">
+    <button class="process-img-btn" (click)="processImageToText()">
+      Process
+    </button>
+  </div>
+  <img [src]="webcamService.previewImage()" class="image-preview" />
+  } @else{
+  <div class="image-preview">
+    <p class="image-preview-text">Image Preview</p>
+  </div>
+  }
+</div>

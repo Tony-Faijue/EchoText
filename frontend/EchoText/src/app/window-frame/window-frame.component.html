@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="place-self-center mt-2 mb-2">
+    <button class="camera-toggle-btn" (click)="toggleCamera()">
+      {{ webcamService.showWebcam() ? "Stop Camera" : "Toggle Camera" }}
+    </button>
+  </div>
+  @if (webcamService.showWebcam() == true){
+  <webcam
+    class="webcam-window"
+    [width]="1080"
+    [height]="720"
+    [videoOptions]="webcamService.videoOptions"
+    [trigger]="webcamService.getTriggerObservable()"
+    (imageCapture)="webcamService.handleImage($event)"
+    (initError)="webcamService.handleInitError($event)"
+    [mirrorImage]="webcamService.mirrorImage()"
+    [allowCameraSwitch]="webcamService.allowCameraSwitch()"
+    [trigger]="webcamService.getTriggerObservable()"
+    (imageCapture)="webcamService.handleImage($event)"
+    [imageQuality]="webcamService.imageQuality()"
+  >
+  </webcam>
+
+  } @else{
+  <div class="webcam-window"></div>
+  }
+  <div class="place-self-center mt-2 mb-2">
+    <button class="capture-btn" (click)="webcamService.triggerSnapShot()">
+      Caputre Image
+    </button>
+  </div>
+</div>
