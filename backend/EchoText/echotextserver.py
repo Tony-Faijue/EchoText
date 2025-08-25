@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, File, UploadFile, Form
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from starlette.status import HTTP_201_CREATED
 import cv2
@@ -7,6 +8,20 @@ import pytesseract
 import pyttsx3
 
 app = FastAPI()
+#Allowed URLS
+origins = [
+    "http://localhost:4200",
+    "http://127.0.0.1:9999",
+]
+#Middle for Routes
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 """
 Response Object To Return
 """
@@ -36,7 +51,7 @@ async def create_new_image_file(
     # Extract text from the image
     best_text, avg_conf, best_config = extract_text_from_image(img)
     # Read text out loud
-    play_text(best_text)
+    #play_text(best_text)
     #Store the new record
     new_id = 0
     if len(all_images) > 0:
