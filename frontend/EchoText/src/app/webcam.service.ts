@@ -39,6 +39,8 @@ export class WebcamService implements OnInit {
   public previewImage = signal('');
   public imageFileName = signal('');
 
+  public isWebcamImage = signal(true);
+
   constructor() { }
 
   public ngOnInit(): void {
@@ -80,7 +82,8 @@ export class WebcamService implements OnInit {
    */
   public triggerSnapShot(): void{
     this.trigger.next();
-    
+    //set true to webcam image
+    this.isWebcamImage.set(true);
   }
 
   /**
