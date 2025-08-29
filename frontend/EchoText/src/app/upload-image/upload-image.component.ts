@@ -36,6 +36,8 @@ export class UploadImageComponent {
     let dataUrl:string  = await this.fileToDataUrl(file);
     console.log("WebcamImage Uploaded:", dataUrl);
     this.webcamService.previewImage.set(dataUrl);
+    //Set the value to false for webcam image
+    this.webcamService.isWebcamImage.set(false);
   } catch (err) {
     console.log("Error Recieving Promise String", err);
   }

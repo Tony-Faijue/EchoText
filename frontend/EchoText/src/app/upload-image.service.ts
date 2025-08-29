@@ -24,11 +24,10 @@ export class UploadImageService {
   webcamService = inject(WebcamService);
 
 
-  baseURL = "http://127.0.0.1:9999/api/process-images";
+  private FILE_URL = "http://127.0.0.1:9998/api/process-images";
+  private WEBCAM_URL = "http://127.0.0.1:9998/api/process-webcam-images";
 
 
- //Testing API with fake data
- // userList: any[] = [];
 
   /**
   *  Upload the file image to the POST URI endpoint, to process the image on the server
@@ -39,8 +38,12 @@ export class UploadImageService {
     const file = this.dataURLToFile(dataUrl, filename);
     const formData = new FormData();
     formData.append('file', file, file.name);
-    return this.http.post<FileImage>(this.baseURL, formData);
+    //Select the corresponding api url based of file or webcam image
+    const isWebcam = this.webcamService.isWebcamImage();
+    const url = isWebcam ? this.WEBCAM_URL : this.FILE_URL;
+    return this.http.post<FileImage>(url, formData);
  }
+
 
  /**
   * Function to convert image data url to a file object to be processed on the server
