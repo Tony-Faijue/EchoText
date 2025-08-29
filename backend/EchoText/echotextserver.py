@@ -65,7 +65,35 @@ async def create_new_image_file(
         processed_text=best_text
     )
     all_images.append(record)
+    print("Text Response:", record.processed_text)
+    return record
 
+@app.post('/api/process-webcam-images', response_model=ImageFile, status_code=HTTP_201_CREATED)
+async def process_webcam_image(
+    file: UploadFile = File(..., description="The image file to process")):
+    contents = await file.read()
+    #skip preprocessing and go straight to extracting text from image
+    try:
+        img = decode_image(contents)
+    except ValueError as ve:
+        raise HTTPException(status_code=400, detail=str(ve))
+
+    best_text, avg_conf, best_config = extract_text_from_image(img)
+    play_text(best_text)
+    # Store the new record
+    new_id = 0
+    if len(all_images) > 0:
+        new_id = (all_images[-1].image_file_id + 1)
+    else:
+        new_id = 1
+    record = ImageFile(
+            image_file_id=new_id,
+            file_name=file.filename,
+            content_type=file.content_type,
+            processed_text=best_text
+    )
+    all_images.append(record)
+    print("Text Response:", record.processed_text)
     return record
 
 """
@@ -202,5 +230,16 @@ def play_text(t):
     engine.say(t)
     engine.runAndWait()
 
+def decode_image(image_bytes):
+    """
+    Convert Raw Bytes to OpenCV Image
+    :param image_bytes: raw bytes for an image
+    :return: an openCV image
+    """
+    arr = np.frombuffer(image_bytes, np.uint8)
+    img = cv2.imdecode(arr, cv2.IMREAD_COLOR)
+    if img is None:
+        raise ValueError("Could not decode raw image bytes")
+    return cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 
