@@ -4,10 +4,11 @@ import { ImagePreviewComponent } from '../image-preview/image-preview.component'
 import { UploadImageComponent } from '../upload-image/upload-image.component';
 import { FileImage, UploadImageService } from '../upload-image.service';
 import { WebcamService } from '../webcam.service';
+import { TextboxOutputComponent } from "../textbox-output/textbox-output.component";
 
 @Component({
   selector: 'app-echo-text',
-  imports: [WindowFrameComponent, ImagePreviewComponent, UploadImageComponent],
+  imports: [WindowFrameComponent, ImagePreviewComponent, UploadImageComponent, TextboxOutputComponent],
   templateUrl: './echo-text.component.html',
   styleUrl: './echo-text.component.css'
 })
