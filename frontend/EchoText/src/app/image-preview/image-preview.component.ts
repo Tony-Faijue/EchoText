@@ -1,6 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { WebcamService } from '../webcam.service';
 import { FileImage, UploadImageService } from '../upload-image.service';
+import { ImageStateService } from '../image-state.service';
 
 @Component({
   selector: 'app-image-preview',
@@ -12,18 +13,11 @@ export class ImagePreviewComponent implements OnInit {
   //Services injected
   webcamService = inject(WebcamService);
   uploadImageService = inject(UploadImageService);
+  imageStateService = inject(ImageStateService);
 
   imageDataURL!: string;
   imageFileName!: string;
 
-
-
-  processedImage : FileImage = {
-      image_file_id : 0,
-      content_type: "",
-      processed_text: "",
-      file_name: "",
-  };
   
   ngOnInit(): void {}
 
@@ -42,7 +36,7 @@ export class ImagePreviewComponent implements OnInit {
       next: (result: FileImage) =>{
         console.log(result);
         console.log(result.processed_text);
-        this.processedImage = result;
+        this.imageStateService.processedImage.set(result);
       },
       error: err => {
         console.error('Upload failed', err);
