@@ -9,9 +9,11 @@ import pyttsx3
 
 app = FastAPI()
 #Allowed URLS
+#To run server
+# fastapi dev echotextserver.py --port 9998
 origins = [
     "http://localhost:4200",
-    "http://127.0.0.1:9999",
+    "http://127.0.0.1:9998",
 ]
 #Middle for Routes
 app.add_middleware(
