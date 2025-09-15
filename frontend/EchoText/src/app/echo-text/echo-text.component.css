@@ -1,8 +1,17 @@
 @import "tailwindcss";
 
 .window-frame-component{
-    @apply w-full lg:w-3/4 bg-slate-700 border-2 border-slate-800 rounded-2xl shadow-xl shadow-slate-800 px-8 py-2;
+    @apply w-full lg:w-3/4 bg-gray-800 border-2 border-slate-800 rounded-2xl shadow-xl shadow-slate-800 px-8 py-2;
 }
 .analytics-board-component{
-    @apply w-full lg:w-1/4 bg-slate-800 border border-slate-100 rounded-2xl shadow-xl shadow-slate-800 px-4 py-2;
+    @apply w-full lg:w-1/4 bg-gray-700 border-l-2 border-l-slate-950 shadow-xl shadow-slate-800 px-4 py-2;
+}
+.header-box{
+    @apply border-b-2 border-b-slate-950 mb-4 pb-4;
+}
+.header{
+    @apply text-5xl justify-self-center text-slate-200;
+}
+.operations-grid{
+    @apply grid grid-rows-2 grid-cols-1 lg:grid-cols-2 border-t-2 border-t-slate-950 mt-12 py-8 px-4 gap-x-4 gap-y-8;
 }

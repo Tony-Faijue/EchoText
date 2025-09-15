@@ -7,13 +7,13 @@
     @apply p-2 m-4;
 }
 .upload-img-div{
-    @apply bg-slate-800 flex flex-col gap-4 border border-slate-100 rounded-2xl hover:shadow-md hover:shadow-slate-100 place-self-center p-4;
+    @apply bg-gray-800 flex flex-col gap-4 border-2 border-slate-950 rounded-2xl hover:shadow-md hover:shadow-slate-100 place-self-center p-4;
 }
 .upload-img-div-2{
     @apply flex flex-col gap-4 border-b border-t border-b-purple-400 border-t-purple-400 items-center py-4 px-2;
 }
 .upload-btn{
-    @apply w-45 bg-emerald-600 hover:bg-emerald-700 hover:shadow-emerald-500 text-white font-semibold py-3 rounded-lg shadow-md transition-all duration-200;
+    @apply w-45 bg-purple-600 hover:bg-purple-700 hover:shadow-purple-500 text-white font-semibold py-3 rounded-lg shadow-md transition-all duration-200;
 }
 .input-image{
     @apply bg-gray-600 hover:bg-gray-700 rounded-lg hover:shadow hover:shadow-slate-100 border border-dotted border-slate-100 w-full h-full p-2;
