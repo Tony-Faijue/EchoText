@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+.voice-audio-border{
+    @apply  bg-gray-800 border-2 border-slate-950 rounded-2xl p-4;
+}
+.voice-audio-window{
+    @apply w-full border-t-2 border-b-2 border-t-purple-600 border-b-purple-600; 
+}
